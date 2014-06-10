@@ -5,7 +5,7 @@
 @implementation ComMfoggBarcodeView
 
 NSDictionary *barcodeDict = nil;
-NSArray *allBarcodes = nil;
+NSArray *barcodeStrings = nil;
 
 @synthesize barcodes;
 
@@ -56,9 +56,6 @@ static const enum zbar_symbol_type_e allSymbols[] =
 
 -(void)dealloc
 {
-	NSLog(@"[VIEW LIFECYCLE EVENT] dealloc");
-    
-	// Release objects and memory allocated by the view
 	RELEASE_TO_NIL(square);
     
 	[super dealloc];
@@ -66,12 +63,7 @@ static const enum zbar_symbol_type_e allSymbols[] =
 
 -(void)initializeState
 {
-	// This method is called right after allocating the view and
-	// is useful for initializing anything specific to the view
-    
 	[super initializeState];
-    
-	NSLog(@"[VIEW LIFECYCLE EVENT] initializeState");
     
     barcodeDict = [[NSDictionary alloc] initWithObjectsAndKeys:
                    [NSNumber numberWithInt: ZBAR_EAN2], @"EAN2",
@@ -93,7 +85,7 @@ static const enum zbar_symbol_type_e allSymbols[] =
                    [NSNumber numberWithInt: ZBAR_CODABAR], @"CODABAR",
                    nil];
 
-    allBarcodes = [NSArray arrayWithObjects:
+    barcodeStrings = [NSArray arrayWithObjects:
                    @"EAN2",
                    @"EAN5",
                    @"EAN8",
@@ -114,16 +106,12 @@ static const enum zbar_symbol_type_e allSymbols[] =
                    nil];
     
     barcodes = [self.proxy valueForKey:@"barcodes"];
-    
-    NSLog([NSString stringWithFormat:@"[VIEW INFO EVENT] BARCODES: %@", barcodes]);
 }
 
 -(ZBarReaderView*)square
 {
-    NSLog(@"[VIEW LIFECYCLE EVENT] square hit");
     if(square == nil){
-        NSLog(@"[VIEW LIFECYCLE EVENT] square initialized");
-        // init reader
+        // initialize the reader
         square = [[ZBarReaderView alloc] initWithFrame:[self frame]];
         ZBarImageScanner * scanner = [ZBarImageScanner new];
         [square initWithImageScanner:scanner];
@@ -135,16 +123,13 @@ static const enum zbar_symbol_type_e allSymbols[] =
         
         if(self.barcodes != nil)
         {
-            NSLog(@"barcodes != nil");
-            
-            NSLog([NSString stringWithFormat:@"barcodes: %@", self.barcodes]);
             for(NSString * barcode in self.barcodes)
             {
                 if(barcode != nil)
                 {
                     if([barcodeDict objectForKey:[barcode uppercaseString]] != nil)
                     {
-                        NSLog([NSString stringWithFormat:@"Barcode type: %@", barcode]);
+                        NSLog([NSString stringWithFormat:@"Listening for barcode type: %@", barcode]);
                         [square.scanner setSymbology:[[barcodeDict objectForKey:[barcode uppercaseString]] intValue] config:ZBAR_CFG_ENABLE to:true];
                     }
                     else
@@ -154,7 +139,7 @@ static const enum zbar_symbol_type_e allSymbols[] =
                 }
                 else
                 {
-                    NSLog([NSString stringWithFormat:@"barcode is nil"]);
+                    NSLog([NSString stringWithFormat:@"barcode is nil :("]);
                 }
             }
         }
@@ -171,11 +156,10 @@ static const enum zbar_symbol_type_e allSymbols[] =
         
         [square setTracksSymbols: NO];
         
+        // Start it up!
         [square start];
 
         [self addSubview:square];
-    } else {
-        // scanner already initialized
     }
     
     return square;
@@ -183,12 +167,6 @@ static const enum zbar_symbol_type_e allSymbols[] =
 
 -(void)frameSizeChanged:(CGRect)frame bounds:(CGRect)bounds
 {
-	// You must implement this method for your view to be sized correctly.
-	// This method is called each time the frame / bounds / center changes
-	// within Titanium.
-    
-	NSLog(@"[VIEW LIFECYCLE EVENT] frameSizeChanged");
-    
 	[TiUtils setView:self.square positionRect:bounds];
 }
 
@@ -205,7 +183,6 @@ static const enum zbar_symbol_type_e allSymbols[] =
         }
     }
     
-    //  couldn't find one on the front, so just get the default video device.
     if ( ! captureDevice)
     {
         captureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
@@ -232,7 +209,6 @@ static const enum zbar_symbol_type_e allSymbols[] =
 
         break;
     };
-
 }
 
 @end

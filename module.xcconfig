@@ -24,4 +24,6 @@
 //
 //
 // IMPORTANT NOTE: always use $(inherited) in your overrides
-// 
+//
+
+OTHER_LDFLAGS=$(inherited) -framework AVFoundation -framework CoreMedia -framework CoreVideo -framework QuartzCore /usr/lib/libiconv.dylib

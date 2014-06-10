@@ -1,39 +1,51 @@
-// This is a test harness for your module
-// You should do something interesting in this harness 
-// to test out the module and to provide instructions 
-// to users on how to use it by example.
+/*
+* Barcode Titanium Module. 
+* 
+* Original Author : Mike Fogg : github.com/mikefogg : June 2014
+* 
+*/ 
 
 
-// open a single window
-var win = Ti.UI.createWindow({
-	backgroundColor:'white'
-});
-var label = Ti.UI.createLabel();
-win.add(label);
-win.open();
-
-// TODO: write your module tests here
 var Barcode = require('com.mfogg.barcode');
 Ti.API.info("module is => " + Barcode);
 
-label.text = Barcode.example();
+// open a single window
+var win = Ti.UI.createWindow({backgroundColor:"#eee"});
 
-Ti.API.info("module exampleProp is => " + Barcode.exampleProp);
-Barcode.exampleProp = "This is a test value";
+var allowed_upcs = [
+  // "EAN2",
+  // "EAN5",
+  // "EAN8",
+  "UPCE",
+  // "ISBN10",
+  "UPCA",
+  "EAN13",
+  // "ISBN13",
+  // "COMPOSITE",
+  // "I25",
+  // "DATABAR",
+  // "DATABAR_EXP",
+  // "CODE39",
+  // "PDF417",
+  // "CODE93",
+  // "CODE128"
+];
 
-if (Ti.Platform.name == "android") {
-	var proxy = Barcode.createExample({
-		message: "Creating an example Proxy",
-		backgroundColor: "red",
-		width: 100,
-		height: 100,
-		top: 100,
-		left: 150
-	});
+var cameraView = Barcode.createView({
+  top: 0,
+  height: 200,
+  width: 320,
+  backgroundColor: "#fff",
+  barcodes: allowed_upcs
+});
 
-	proxy.printMessage("Hello world!");
-	proxy.message = "Hi world!.  It's me again.";
-	proxy.printMessage("Hello world!");
-	win.add(proxy);
-}
+cameraView.addEventListener("success", function(event){
+	// event.data == number
+	// event.type == type of scan
+	
+	Ti.API.info("Scanned "+event.data);
+	alert("Scanned "+event.data);
+});
 
+win.add(cameraView);
+win.open();

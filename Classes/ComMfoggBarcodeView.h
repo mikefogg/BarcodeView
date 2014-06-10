@@ -2,12 +2,15 @@
 #import "TiBase.h"
 #import "TiHost.h"
 #import "TiUtils.h"
+#import "ZBarSDK.h"
 
-@interface ComMfoggBarcodeView : TiUIView
+@interface ComMfoggBarcodeView : TiUIView <ZBarReaderViewDelegate>
 {
     
-    UIView *square;
+    ZBarReaderView *square;
 }
+
+@property (nonatomic, retain) NSArray *barcodes;
 
 @end
 

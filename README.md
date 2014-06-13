@@ -12,7 +12,7 @@ This module will continue to grow and new options will be added in the near futu
 Include the module in your tiapp.xml:
 
 <pre><code>
-<module platform="iphone">com.mfogg.barcode</module>
+com.mfogg.barcode
 
 </code></pre>
 
@@ -61,7 +61,8 @@ var barcodeView = Barcode.createView({
   height: 320,
   width: 320,
   barcodes: allowed_upcs, // Required
-  minQuality: 10 // Optional (defaults to 0)
+  minQuality: 10 // Optional (defaults to 0),
+  flashEnabled: false // Optional (defaults to false)
 });
 
 win.add(barcodeView);
@@ -70,10 +71,25 @@ win.open();
 </code></pre>
 * Note here that the created view (ex. 'barcodeView' above) can have other views added on top of it to act as a camera overlay (exactly how you would a standard Ti.UI.view)
 
+<h2>Functions</h2>
 
-<h3>Listeners</h3>
+<h3>barcodeView.enableFlash();</h3>
 
-Currently, the only event listener enabled is "success" which will fire __every__ time a barcode that fits the types above comes into the view.
+Turns the flash on (and fires the "flashChange" event)
+
+<h3>barcodeView.disableFlash();</h3>
+
+Turns the flash off (and fires the "flashChange" event)
+
+<h3>barcodeView.toggleFlash();</h3>
+
+Toggles the flash on or off (and fires the "flashChange" event)
+
+<h2>Listeners</h2>
+
+<h3>"success"</h3>
+
+Will fire __every__ time a barcode that fits the types above comes into the view.
 
 <pre><code>
 barcodeView.addEventListener("success", function(event){
@@ -88,10 +104,22 @@ barcodeView.addEventListener("success", function(event){
 
 </code></pre>
 
+<h3>"flashChange"</h3>
+
+Will fire when the flash is toggled on or off
+
+<pre><code>
+barcodeView.addEventListener("flashChange", function(event){
+  // event.flashEnabled = new value of the flashEnabled
+  
+  Ti.API.info("Flash Enabled: "+event.flashEnabled);
+});
+
+</code></pre>
+
 <h2>Known Issues and Future Improvements</h2>
 
-1. Ability to manage the light on/off (on initialize and via function call).
-2. Android support
+1. Android support
 
 ... anything else :)
 

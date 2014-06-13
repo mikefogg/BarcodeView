@@ -6,6 +6,7 @@
 
 @synthesize barcodes;
 @synthesize minQuality;
+@synthesize flashEnabled;
 @synthesize barcodeDict;
 @synthesize barcodeStrings;
 
@@ -110,6 +111,9 @@ static const enum zbar_symbol_type_e allSymbols[] =
     
     // Set the minQuality (not setting it will default to 0)
     minQuality = ([self.proxy valueForKey:@"minQuality"] != nil) ? [[self.proxy valueForKey:@"minQuality"] intValue] : 0;
+    
+    // Set the value of flashEnabled (true or false, defaults to false)
+    flashEnabled = ([self.proxy valueForKey:@"flashEnabled"] != nil) ? [[self.proxy valueForKey:@"flashEnabled"] boolValue] : false;
 }
 
 -(ZBarReaderView*)square
@@ -160,6 +164,13 @@ static const enum zbar_symbol_type_e allSymbols[] =
         
         [square setTracksSymbols: NO];
         
+        // Set the flash mode
+        if(flashEnabled){
+            square.torchMode = AVCaptureTorchModeOn;
+        } else {
+            square.torchMode = AVCaptureTorchModeOff;
+        }
+        
         // Start it up!
         [square start];
 
@@ -199,7 +210,6 @@ static const enum zbar_symbol_type_e allSymbols[] =
 
 - (void) readerView: (ZBarReaderView*) view didReadSymbols: (ZBarSymbolSet*) syms fromImage: (UIImage*) img
 {
-    
     for(ZBarSymbol *sym in syms) {
         if(sym.quality > minQuality)
         {
@@ -217,6 +227,45 @@ static const enum zbar_symbol_type_e allSymbols[] =
         }
         break;
     };
+}
+
+# pragma public api
+
+- (void)enableFlash:(id)args
+{
+    [self square].torchMode = AVCaptureTorchModeOn;
+    flashEnabled = true;
+    
+    NSMutableDictionary *event = [NSMutableDictionary dictionary];
+    
+    [event setObject:[NSNumber numberWithBool:flashEnabled] forKey:@"flashEnabled"];
+    
+    [self.proxy fireEvent:@"flashChange" withObject:event];
+}
+
+- (void)disableFlash:(id)args
+{
+    [self square].torchMode = AVCaptureTorchModeOff;
+    flashEnabled = false;
+    
+    NSMutableDictionary *event = [NSMutableDictionary dictionary];
+    
+    [event setObject:[NSNumber numberWithBool:flashEnabled] forKey:@"flashEnabled"];
+    
+    [self.proxy fireEvent:@"flashChange" withObject:event];
+
+}
+
+- (void)toggleFlash:(id)args
+{
+    if(flashEnabled)
+    {
+        [self disableFlash:args];
+    }
+    else
+    {
+        [self enableFlash:args];
+    }
 }
 
 @end

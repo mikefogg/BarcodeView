@@ -11,6 +11,9 @@
 }
 
 @property (nonatomic, retain) NSArray *barcodes;
+@property (nonatomic, retain) NSDictionary *barcodeDict;
+@property (nonatomic, retain) NSArray *barcodeStrings;
+@property (nonatomic) int minQuality;
 
 @end
 

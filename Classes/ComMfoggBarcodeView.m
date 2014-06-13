@@ -4,10 +4,10 @@
 
 @implementation ComMfoggBarcodeView
 
-NSDictionary *barcodeDict = nil;
-NSArray *barcodeStrings = nil;
-
 @synthesize barcodes;
+@synthesize minQuality;
+@synthesize barcodeDict;
+@synthesize barcodeStrings;
 
 static const enum zbar_symbol_type_e symbolValues[] =
 {
@@ -105,7 +105,11 @@ static const enum zbar_symbol_type_e allSymbols[] =
                    @"CODABAR",
                    nil];
     
+    // Set the barcodes
     barcodes = [self.proxy valueForKey:@"barcodes"];
+    
+    // Set the minQuality (not setting it will default to 0)
+    minQuality = ([self.proxy valueForKey:@"minQuality"] != nil) ? [[self.proxy valueForKey:@"minQuality"] intValue] : 0;
 }
 
 -(ZBarReaderView*)square
@@ -197,16 +201,20 @@ static const enum zbar_symbol_type_e allSymbols[] =
 {
     
     for(ZBarSymbol *sym in syms) {
-        NSLog(@"Data= %@",sym.data);
-        NSLog(@"Data= %@",sym.typeName);
-        
-        NSMutableDictionary *event = [NSMutableDictionary dictionary];
-        
-        [event setObject:sym.data forKey:@"data"];
-        [event setObject:sym.typeName forKey:@"type"];
-        
-        [self.proxy fireEvent:@"success" withObject:event];
-
+        if(sym.quality > minQuality)
+        {
+            NSLog(@"Data= %@",sym.data);
+            NSLog(@"Type= %@",sym.typeName);
+            NSLog(@"Quality of Scan (minimum of %d): %d", minQuality, sym.quality);
+            
+            NSMutableDictionary *event = [NSMutableDictionary dictionary];
+            
+            [event setObject:sym.data forKey:@"data"];
+            [event setObject:sym.typeName forKey:@"type"];
+            [event setObject:[NSNumber numberWithInt:sym.quality] forKey:@"quality"];
+            
+            [self.proxy fireEvent:@"success" withObject:event];
+        }
         break;
     };
 }

@@ -18,7 +18,7 @@ Include the module in your tiapp.xml:
 
 <h2>Usage</h2>
 
-Currently the options you have are limited to what type of barcodes you would like to 'listen' for, but that makes the module pretty simple :)
+Currently the options you have are limited to what type of barcodes you would like to 'listen' for and the miniumum scan quality, but that makes the module pretty simple :)
 
 The types of barcodes available are:
 
@@ -60,7 +60,8 @@ var barcodeView = Barcode.createView({
   top: 0,
   height: 320,
   width: 320,
-  barcodes: allowed_upcs
+  barcodes: allowed_upcs, // Required
+  minQuality: 10 // Optional (defaults to 0)
 });
 
 win.add(barcodeView);
@@ -78,9 +79,11 @@ Currently, the only event listener enabled is "success" which will fire __every_
 barcodeView.addEventListener("success", function(event){
 	// event.data == number returned from the scan
 	// event.type == type of scan
-	
+  // event.quality == quality of scan (http://zbar.sourceforge.net/iphone/sdkdoc/ZBarSymbol.html#quality__i)
+  
 	Ti.API.info("[NEW SCAN] Data: "+event.data);
 	Ti.API.info("[NEW SCAN] Type: "+event.type);
+  Ti.API.info("[NEW SCAN] Quality: "+event.quality);
 });
 
 </code></pre>

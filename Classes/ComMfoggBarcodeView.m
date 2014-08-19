@@ -7,6 +7,8 @@
 @synthesize barcodes;
 @synthesize minQuality;
 @synthesize flashEnabled;
+@synthesize scanCropPreview;
+@synthesize scanCrop;
 @synthesize barcodeDict;
 @synthesize barcodeStrings;
 
@@ -114,6 +116,12 @@ static const enum zbar_symbol_type_e allSymbols[] =
     
     // Set the value of flashEnabled (true or false, defaults to false)
     flashEnabled = ([self.proxy valueForKey:@"flashEnabled"] != nil) ? [[self.proxy valueForKey:@"flashEnabled"] boolValue] : false;
+
+    // Set the value of flashEnabled (true or false, defaults to false)
+    scanCropPreview = ([self.proxy valueForKey:@"scanCropPreview"] != nil) ? [[self.proxy valueForKey:@"scanCropPreview"] boolValue] : false;
+
+    // Set the value of flashEnabled (true or false, defaults to false)
+    scanCrop = ([self.proxy valueForKey:@"scanCrop"] != nil) ? [self.proxy valueForKey:@"scanCrop"] : nil;
 }
 
 -(ZBarReaderView*)square
@@ -171,13 +179,53 @@ static const enum zbar_symbol_type_e allSymbols[] =
             square.torchMode = AVCaptureTorchModeOff;
         }
         
+        // Set the scanCrop area
+        
+        
+        if(scanCrop != nil){
+            square.scanCrop = [self formatScanCrop:[self frame]];
+        }
+        
+        
         // Start it up!
         [square start];
 
         [self addSubview:square];
+        
+        // Add a scancrop preview if we want it
+
+        if(scanCropPreview && scanCrop != nil){
+            CGFloat prev_x,prev_y,prev_width,prev_height;
+            
+            prev_x = [[scanCrop objectForKey:@"x"] floatValue];
+            prev_y = [[scanCrop objectForKey:@"y"] floatValue];
+            prev_width = [[scanCrop objectForKey:@"width"] floatValue];
+            prev_height = [[scanCrop objectForKey:@"height"] floatValue];
+            
+            UIView* scan_overlay_view = [[UIView alloc]initWithFrame:CGRectMake(prev_x, prev_y, prev_width, prev_height)];
+            scan_overlay_view.backgroundColor = [UIColor redColor];
+            scan_overlay_view.alpha = 0.35;
+            
+            [self addSubview:scan_overlay_view];
+        }
     }
     
     return square;
+}
+
+-(CGRect)formatScanCrop:(CGRect)frame
+{
+    CGFloat x,y,width,height,frame_width,frame_height;
+    
+    frame_width = frame.size.width > 0 ? frame.size.width : [UIScreen mainScreen].bounds.size.width;
+    frame_height = frame.size.height > 0 ? frame.size.height : [UIScreen mainScreen].bounds.size.height;
+    
+    x = [[scanCrop objectForKey:@"y"] floatValue] / frame_height;
+    y = (frame_width - [[scanCrop objectForKey:@"width"] floatValue] - [[scanCrop objectForKey:@"x"] floatValue]) / frame_width;
+    width = [[scanCrop objectForKey:@"height"] floatValue] / frame_height;
+    height = [[scanCrop objectForKey:@"width"] floatValue] / frame_width;
+    
+    return CGRectMake(x, y, width, height);
 }
 
 -(void)frameSizeChanged:(CGRect)frame bounds:(CGRect)bounds

@@ -61,8 +61,15 @@ var barcodeView = Barcode.createView({
   height: 320,
   width: 320,
   barcodes: allowed_upcs, // Required
-  minQuality: 10 // Optional (defaults to 0),
-  flashEnabled: false // Optional (defaults to false)
+  minQuality: 10, // Optional (defaults to 0),
+  flashEnabled: false, // Optional (defaults to false)
+  scanCrop: { // Optional
+    x: 10,
+    y: 10,
+    height: 100,
+    width: 100
+  }, 
+  scanCropPreview: true // Optional (defaults to false)
 });
 
 win.add(barcodeView);

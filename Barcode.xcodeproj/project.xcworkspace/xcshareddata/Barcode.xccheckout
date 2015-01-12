@@ -10,31 +10,31 @@
 	<string>Barcode</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>32922519-AEEB-4729-B4FA-D07C4E888AC5</key>
-		<string>ssh://github.com/mikefogg/BarcodeView.git</string>
+		<key>0BDF226F2C8F4F3AB658DBB442F4E890C2414B69</key>
+		<string>https://github.com/caspahouzer/BarcodeView.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Barcode.xcodeproj/project.xcworkspace</string>
+	<string>Barcode.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>32922519-AEEB-4729-B4FA-D07C4E888AC5</key>
+		<key>0BDF226F2C8F4F3AB658DBB442F4E890C2414B69</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://github.com/mikefogg/BarcodeView.git</string>
+	<string>https://github.com/caspahouzer/BarcodeView.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>32922519-AEEB-4729-B4FA-D07C4E888AC5</string>
+	<string>0BDF226F2C8F4F3AB658DBB442F4E890C2414B69</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>32922519-AEEB-4729-B4FA-D07C4E888AC5</string>
+			<string>0BDF226F2C8F4F3AB658DBB442F4E890C2414B69</string>
 			<key>IDESourceControlWCCName</key>
-			<string>Barcode</string>
+			<string>BarcodeView</string>
 		</dict>
 	</array>
 </dict>

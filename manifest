@@ -2,7 +2,7 @@
 # this is your module manifest and used by Titanium
 # during compilation, packaging, distribution, etc.
 #
-version: 0.2
+version: 0.3
 apiversion: 2
 description: My module
 author: Your Name
@@ -16,4 +16,4 @@ moduleid: com.mfogg.barcode
 guid: a572b3de-ec2d-4d58-b671-0dd4263e89ea
 platform: iphone
 minsdk: 3.4.1.GA
-architectures: armv7 i386 arm64
+architectures: armv7 i386 x86_64 arm64

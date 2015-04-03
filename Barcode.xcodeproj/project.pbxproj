@@ -22,6 +22,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		9E3471701A6F9338006CC900 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E34716F1A6F9338006CC900 /* libzbar.a */; };
 		AA747D9F0F9514B9006C5449 /* ComMfoggBarcode_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* ComMfoggBarcode_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 		F7DBD4BB1946313400A04DD3 /* ComMfoggBarcodeModule.h in Headers */ = {isa = PBXBuildFile; fileRef = F7DBD4B31946313400A04DD3 /* ComMfoggBarcodeModule.h */; };
@@ -57,7 +58,6 @@
 		F7DBD52F1946345500A04DD3 /* ZBarReaderViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F7DBD5151946345500A04DD3 /* ZBarReaderViewController.h */; };
 		F7DBD5301946345500A04DD3 /* ZBarSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = F7DBD5161946345500A04DD3 /* ZBarSDK.h */; };
 		F7DBD5311946345600A04DD3 /* ZBarSymbol.h in Headers */ = {isa = PBXBuildFile; fileRef = F7DBD5171946345500A04DD3 /* ZBarSymbol.h */; };
-		F7DBD5321946345600A04DD3 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F7DBD5181946345500A04DD3 /* libzbar.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +72,7 @@
 
 /* Begin PBXFileReference section */
 		24DD6D1B1134B66800162E58 /* titanium.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = titanium.xcconfig; sourceTree = "<group>"; };
+		9E34716F1A6F9338006CC900 /* libzbar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libzbar.a; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* ComMfoggBarcode_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComMfoggBarcode_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libComMfoggBarcode.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libComMfoggBarcode.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,7 +110,6 @@
 		F7DBD5151946345500A04DD3 /* ZBarReaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarReaderViewController.h; sourceTree = "<group>"; };
 		F7DBD5161946345500A04DD3 /* ZBarSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarSDK.h; sourceTree = "<group>"; };
 		F7DBD5171946345500A04DD3 /* ZBarSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarSymbol.h; sourceTree = "<group>"; };
-		F7DBD5181946345500A04DD3 /* libzbar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libzbar.a; sourceTree = "<group>"; };
 		F7DBD51A1946345500A04DD3 /* zbar-back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zbar-back.png"; sourceTree = "<group>"; };
 		F7DBD51B1946345500A04DD3 /* zbar-help.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "zbar-help.html"; sourceTree = "<group>"; };
 		F7DBD51C1946345500A04DD3 /* zbar-helpicons.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zbar-helpicons.png"; sourceTree = "<group>"; };
@@ -123,7 +123,7 @@
 			files = (
 				F7DBD4C81946333800A04DD3 /* AVFoundation.framework in Frameworks */,
 				F7DBD4C91946333800A04DD3 /* CoreMedia.framework in Frameworks */,
-				F7DBD5321946345600A04DD3 /* libzbar.a in Frameworks */,
+				9E3471701A6F9338006CC900 /* libzbar.a in Frameworks */,
 				F7DBD4CA1946333800A04DD3 /* CoreVideo.framework in Frameworks */,
 				F7DBD4CB1946333800A04DD3 /* libiconv.dylib in Frameworks */,
 				F7DBD4CC1946333800A04DD3 /* QuartzCore.framework in Frameworks */,
@@ -195,8 +195,8 @@
 		F7DBD5001946345500A04DD3 /* ZBarSDK */ = {
 			isa = PBXGroup;
 			children = (
+				9E34716F1A6F9338006CC900 /* libzbar.a */,
 				F7DBD5011946345500A04DD3 /* Headers */,
-				F7DBD5181946345500A04DD3 /* libzbar.a */,
 				F7DBD5191946345500A04DD3 /* Resources */,
 			);
 			path = ZBarSDK;
@@ -492,6 +492,7 @@
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
+				VALID_ARCHS = "armv7 i386 x86_64 arm64";
 			};
 			name = Debug;
 		};
@@ -524,6 +525,7 @@
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
+				VALID_ARCHS = "armv7 i386 x86_64 arm64";
 			};
 			name = Release;
 		};

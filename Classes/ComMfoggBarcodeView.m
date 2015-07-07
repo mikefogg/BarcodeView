@@ -32,8 +32,7 @@ static const enum zbar_symbol_type_e symbolValues[] =
     ZBAR_PDF417,
     ZBAR_QRCODE,
     ZBAR_CODE93,
-    ZBAR_CODE128,
-    ZBAR_CODABAR,
+    ZBAR_CODE128
 };
 
 static const enum zbar_symbol_type_e allSymbols[] =
@@ -53,8 +52,7 @@ static const enum zbar_symbol_type_e allSymbols[] =
     ZBAR_CODE39,
     ZBAR_PDF417,
     ZBAR_CODE93,
-    ZBAR_CODE128,
-    ZBAR_CODABAR,
+    ZBAR_CODE128
 };
 
 -(void)dealloc
@@ -85,7 +83,6 @@ static const enum zbar_symbol_type_e allSymbols[] =
                    [NSNumber numberWithInt: ZBAR_PDF417], @"PDF417",
                    [NSNumber numberWithInt: ZBAR_CODE93], @"CODE93",
                    [NSNumber numberWithInt: ZBAR_CODE128], @"CODE128",
-                   [NSNumber numberWithInt: ZBAR_CODABAR], @"CODABAR",
                    nil];
 
     barcodeStrings = [NSArray arrayWithObjects:
@@ -105,7 +102,6 @@ static const enum zbar_symbol_type_e allSymbols[] =
                    @"PDF417",
                    @"CODE93",
                    @"CODE128",
-                   @"CODABAR",
                    nil];
     
     // Set the barcodes

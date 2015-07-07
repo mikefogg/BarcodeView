@@ -15,5 +15,5 @@ name: Barcode
 moduleid: com.mfogg.barcode
 guid: a572b3de-ec2d-4d58-b671-0dd4263e89ea
 platform: iphone
-minsdk: 3.4.1.GA
-architectures: armv7 i386 x86_64 arm64
+minsdk: 4.0.0.GA
+architectures: armv7 arm64 i386 x86_64

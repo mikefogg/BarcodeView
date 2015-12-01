@@ -135,6 +135,9 @@ static const enum zbar_symbol_type_e allSymbols[] =
         
         if(self.barcodes != nil)
         {
+        	//disable all formats
+        	[square.scanner setSymbology:0 config:ZBAR_CFG_ENABLE to:false];
+        	//now enable only those which are required
             for(NSString * barcode in self.barcodes)
             {
                 if(barcode != nil)

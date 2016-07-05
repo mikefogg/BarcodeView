@@ -140,4 +140,6 @@ Do whatever you want, however you want, whenever you want. And if you find a pro
 * https://github.com/acktie/Acktie-Mobile-iOS-Barcode-Reader - Got a lot of inspiration from what these guys did.
 * http://zbar.sourceforge.net/ - ZBar Barcode Reader
 
+enjoy
+
 

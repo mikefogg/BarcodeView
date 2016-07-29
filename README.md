@@ -2,7 +2,7 @@
 WARNING:
 =============
 
-Work has stopped on this module as of 7/28/2016. All features of this module have been merged together with my SquareCamera module. If you're looking for an easy way to take pictures, please visit https://github.com/mikefogg/squarecamera **or scan barcodes** for future updates! Thanks!
+Work has stopped on this module as of 7/28/2016. All features of this module have been merged together with my SquareCamera module. If you're looking for an easy way to take pictures **or scan barcodes**, please visit https://github.com/mikefogg/squarecamera for future updates! Thanks!
 
 
 Appcelerator Titanium :: Barcode View
